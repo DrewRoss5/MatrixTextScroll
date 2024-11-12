@@ -4,28 +4,47 @@
 #include <time.h>
 #include <chrono>
 #include <thread>
-#include <cstdlib>
+#include <vector>
 
 
 #include "../inc/color.h"
 #include "../inc/term_window.h"
+#include "../inc/line.h"
 
 int main(){
-    system("clear");
-    std::srand(time(NULL));
-    std::string chars = "abcdefghiklmnopqrstuvwyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
-    int charLen = chars.length();
+    // in future versions, these will be user-set
+    std::string color = COLOR_GREEN;
+    std::string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
+    int sizeMin = 10;
+    int sizeMax = 15;
+    int delayMs = 50;
+    // initialize the window and the line array
     TermWindow win;
-    std::vector<std::string> colors = {"red", "green", "blue", "yellow", "cyan", "magenta", "white"};
-    while (true){
-        int colNo = rand() % (win.width - 2); 
-        for (int i = 0; i < colNo; i++){
-            std::cout << " ";
-        }
-        std::string color = colors[rand() % 6];
-        std::string chr;
-        chr.push_back(chars[rand() % charLen]);
-        std::cout << colorize(chr, parseColor(color)) << "\n";
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::vector<Line> lines;
+    for (int i = 0; i < (win.width - 1); i++){
+        int size = std::rand() % (sizeMax - sizeMin) + sizeMin;
+        lines.push_back(Line(size, charset, color));
     }
+    // run the display
+    while (true){
+        // determine where the line should go
+        Line* newLine = nullptr;
+        do {
+            int lineIndex = rand() % (win.width - 1);
+            newLine = &lines[lineIndex];
+        }
+        while (newLine->active());
+        newLine->activate();
+        // display each active line 
+        for (int i = 0; i < (win.width - 1); i++){
+            if (lines[i].active())
+                std::cout << lines[i];
+            else
+                std::cout << " ";
+        }
+        std::cout << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    }
+
+
 }

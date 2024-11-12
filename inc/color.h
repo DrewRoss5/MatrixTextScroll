@@ -14,6 +14,6 @@
 #include <string>
 
 std::string parseColor(const std::string& color_str);
-std::string colorize(const std::string& str, const std::string &color);
+std::string colorize(char str, const std::string &color);
 
 #endif

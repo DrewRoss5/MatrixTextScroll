@@ -26,7 +26,7 @@ std::string parseColor(const std::string& colorStr){
 }
 
 // appends an ansi color code to the beginning of a string and COLOR_RESET to the end, effectively making it a "colored" string when displayed iin a terminal
-std::string colorize(const std::string& str, const std::string &color){
+std::string colorize(const char str, const std::string &color){
     std::stringstream out;
     out << color << str << COLOR_RESET;
     return out.str();

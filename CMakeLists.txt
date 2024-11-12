@@ -6,4 +6,4 @@ project(MatrixScroll VERSION 0.1.0)
 set(SOURCE_DIR "src/")
 set(INC_DIR "inc/")
 
-add_executable(MatScroll ${SOURCE_DIR}main.cpp ${SOURCE_DIR}colors.cpp ${INC_DIR}color.h)
+add_executable(MatScroll ${SOURCE_DIR}main.cpp ${SOURCE_DIR}colors.cpp ${SOURCE_DIR}term_window.cpp ${SOURCE_DIR}line.cpp ${INC_DIR}color.h ${INC_DIR}term_window.h ${INC_DIR}line.h)
