@@ -17,7 +17,7 @@ int main(){
     std::string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
     int sizeMin = 10;
     int sizeMax = 15;
-    int delayMs = 50;
+    int delayMs = 30;
     // initialize the window and the line array
     TermWindow win;
     std::vector<Line> lines;
