@@ -12,6 +12,11 @@
 #include "../inc/line.h"
 
 int main(){
+    std::srand(time(nullptr));
+    // display the splash text in a random color
+    std::vector<std::string> splashColors = {COLOR_RED, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_CYAN, COLOR_MAGENTA, COLOR_WHITE, COLOR_GREY};
+    std::string splashColor = splashColors[std::rand() % 8];
+    std::cout << colorize("Wake up, neo", splashColor) << std::endl;
     // in future versions, these will be user-set
     std::string color = COLOR_GREEN;
     std::string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";

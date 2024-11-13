@@ -12,8 +12,20 @@
 #define COLOR_RESET "\033[0m"
 
 #include <string>
+#include <iostream>
+#include <sstream>
 
 std::string parseColor(const std::string& color_str);
-std::string colorize(char str, const std::string &color);
+
+
+
+// appends an ansi color code to the beginning of a string and COLOR_RESET to the end, effectively making it a "colored" string when displayed iin a terminal
+template <typename T>
+std::string colorize(const T& str, const std::string &color){
+    std::stringstream out;
+    out << color << str << COLOR_RESET;
+    return out.str();
+}
+
 
 #endif
