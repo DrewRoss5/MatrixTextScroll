@@ -19,6 +19,7 @@ int main(int argc, char** argv){
     po::options_description desc("Allowed options");
     desc.add_options()
         ("help", "displays the help menu")
+        ("bold", "emboldens the output text")
         ("minlen",   po::value<int>(), "the minimum length for each vertical line of text (default = 10)")
         ("maxlen",   po::value<int>(), "the maximum length for each vertical line of text (default = 15)")
         ("delay",   po::value<int>(), "the delay in milliseconds between each row being printed (default = 30)")
@@ -46,6 +47,8 @@ int main(int argc, char** argv){
             std::cerr << colorize("error: ", COLOR_RED) << "invalid color. Use --help to see valid color options";
         }
     }
+    if (options.count("bold"))
+        color += "\033[1m";
     // validate the options 
     if (sizeMin >= sizeMax){
         std::cerr << colorize("error: ", COLOR_RED) << "The minimum line length must be less than the maximum" << std::endl;
@@ -83,6 +86,4 @@ int main(int argc, char** argv){
         std::cout << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
     }
-
-
 }
