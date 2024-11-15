@@ -45,6 +45,7 @@ int main(int argc, char** argv){
         }
         catch (std::invalid_argument e){
             std::cerr << colorize("error: ", COLOR_RED) << "invalid color. Use --help to see valid color options";
+            return 1;
         }
     }
     if (options.count("bold"))
